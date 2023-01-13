@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"todobhv/state"
+	"github.com/xhadzi01/todobhv/state"
 )
 
 func main() {
