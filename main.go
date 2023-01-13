@@ -8,9 +8,15 @@ import (
 
 func main() {
 	fmt.Println("Hiiii")
-	var aa state.Task
+	task1 := state.NewTask("Some name", "Some Description", state.Priority_High)
+	task2 := state.NewTask("Some other name", "Some other Description", state.Priority_Low)
 
-	aa.ID = 15
+	strBytes, _ := task1.ToJson()
+	strBytes2, _ := task2.ToJson()
 
-	fmt.Println(aa)
+	fmt.Println(string(strBytes))
+	fmt.Println(string(strBytes2))
+
+	task3, _ := state.LoadTask(strBytes)
+	fmt.Println(task3.ToString())
 }
