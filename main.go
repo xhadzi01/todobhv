@@ -1,36 +1,48 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"os"
 
-	"github.com/xhadzi01/todobhv/taskManagement"
+	//"github.com/xhadzi01/todobhv/taskManagement"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html"
+	"github.com/xhadzi01/todobhv/controllers"
+	"github.com/xhadzi01/todobhv/initializers"
 )
 
+func init() {
+	initializers.LoadEnvVars()
+	initializers.ConnectToDB()
+}
+
 func main() {
-	////////////////////////////////////////////////////////
-	///////////////////TASK MARSHALING//////////////////////
-	task1 := taskManagement.NewTask("Some name", "Some Description", taskManagement.TaskPriority_High)
-	task2 := taskManagement.NewTask("Some other name", "Some other Description", taskManagement.TaskPriority_Low)
+	// Load templates
+	engine := html.New("./views", ".tmpl")
 
-	strBytes, _ := json.Marshal(task1)
-	strBytes2, _ := json.Marshal(task2)
+	// Create app
+	app := fiber.New(fiber.Config{
+		Views: engine,
+	})
 
-	fmt.Println(string(strBytes))
-	fmt.Println(string(strBytes2))
+	// Configure app
+	app.Static("/", "./public")
 
-	task3 := taskManagement.NewTask("AAA", "AAA", taskManagement.TaskPriority_Low)
+	// REST Routing
+	app.Get("/api/tasks", controllers.FetchTasks)
+	app.Post("/api/tasks", controllers.CreateTask)
+	app.Get("/api/tasks/:id", controllers.FetchTask)
+	app.Delete("/api/tasks/:id", controllers.DeleteTask)
 
-	json.Unmarshal(strBytes, &task3)
-	////////////////////////////////////////////////////////
-	//////////////DATA MANAGEMENT///////////////////////////
+	// HTTP frontend Routing
+	frontendRoutes := []string{
+		"/",
+		"/about",
+	}
 
-	dm := taskManagement.NewDataManagement(`C:\projectbins\Go\todobhv\testing`, `jackson`)
+	for _, route := range frontendRoutes {
+		app.Get(route, controllers.Home)
+	}
 
-	dm.SaveTask(task1)
-	dm.SaveTask(task2)
-
-	task4, _ := dm.LoadTask(1)
-	fmt.Println(task3.ToString())
-	fmt.Println(task4.ToString())
+	// Start app
+	app.Listen(":" + os.Getenv("PORT"))
 }
