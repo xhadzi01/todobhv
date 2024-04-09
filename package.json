@@ -1,0 +1,30 @@
+{
+  "name": "todobhv",
+  "version": "1.0.0",
+  "description": "Simple ToDo app behavior",
+  "main": "esbuild.js",
+  "scripts": {
+    "dev": "node esbuild.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhadzi01/todobhv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xhadzi01/todobhv/issues"
+  },
+  "homepage": "https://github.com/xhadzi01/todobhv#readme",
+  "dependencies": {
+    "@types/react": "^18.2.75",
+    "@types/react-dom": "^18.2.24",
+    "esbuild": "^0.16.17",
+    "esbuild-sass-plugin": "^2.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  }
+}
