@@ -10,6 +10,8 @@ func LoadEnvVars() {
 	err := godotenv.Load()
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		errMsg := "Error loading .env file"
+		log.Fatal(errMsg)
+		panic(errMsg)
 	}
 }

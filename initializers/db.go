@@ -1,10 +1,9 @@
 package initializers
 
 import (
-	"fmt"
-	"os"
+	"log"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -12,10 +11,11 @@ var DB *gorm.DB
 
 func ConnectToDB() {
 	var err error
-	DB, err = gorm.Open(postgres.Open(os.Getenv("DB")), &gorm.Config{})
+	DB, err = gorm.Open(sqlite.Open("data.db"), &gorm.Config{})
 
 	if err != nil {
-		fmt.Println("Can't connect to db")
+		errMsg := "Can't connect to db"
+		log.Fatal(errMsg)
+		panic(errMsg)
 	}
-
 }
