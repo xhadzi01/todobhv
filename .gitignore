@@ -22,3 +22,5 @@
 # data test directories
 testing
 public/assets/*
+node_modules/*
+package-lock.json
