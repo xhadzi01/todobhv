@@ -1,0 +1,73 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "2.0.0",
+    "tasks": [
+        // ---------------------------
+        // npm init section
+        // ---------------------------
+        {
+            "label": "npm init",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "init",
+                "-y",
+            ],
+            "group": "nmp_init",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        // ---------------------------
+        // npm install section
+        // ---------------------------
+        {
+            "label": "npm install deps",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "install",
+                "react", "react-dom", "react-router-dom"
+            ],
+            "group": "nmp_install",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        {
+            "label": "npm install TS deps",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "install",
+                "--save-devs", "@types/react", "@types/react-dom", "esbuild@0.16.17", "esbuild-sass-plugin@2.5.0"
+            ],
+            "group": "nmp_install",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        },
+        // ---------------------------
+        // npm run section
+        // ---------------------------
+        {
+            "label": "npm run dev",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "dev"
+            ],
+            "group": "nmp_run",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }
+        }
+    ]
+}
